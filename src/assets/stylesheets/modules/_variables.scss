@@ -1,0 +1,58 @@
+$fontFamily: 'Open Sans', sans-serif;
+$font-sizes: (
+  'small': 0.75em,
+  'normal': 1em,
+  'medium': 1.25em,
+  'large': 1.5em,
+  'xlarge': 2em,
+);
+
+$font-weights: (
+  'normal': 400,
+  'bold': 700,
+);
+
+$line-heights: (
+  'small': 0.75,
+  'normal': 1,
+  'medium': 1.2,
+  'large': 1.5,
+);
+
+$spacings: (
+  '0': 0,
+  '1': 0.0625rem,
+  '2': 0.125rem,
+  '3': 0.25rem,
+  '4': 0.5rem,
+  '5': 0.75rem,
+  '6': 1rem,
+  '7': 1.25rem,
+  '8': 1.5rem,
+  '9': 2rem,
+  '10': 2.25rem,
+);
+
+$border-widths: (
+  '0': 0,
+  '1': 0.0625rem,
+  '2': 0.125rem,
+);
+
+$border-radius: (
+  '0': 0,
+  '1': 0.125rem,
+  '2': 0.25rem,
+  '3': 0.5rem,
+);
+
+$colors: (
+  'primary': #57407c,
+  'primary-dark': #3d2963,
+  'secondary': #00d4ff,
+  'light': #f5f5f5,
+  'dark': #1d2331,
+  'paper-dark': #283042,
+  'paper-light': #d6d6d6,
+  'danger': #ff4d4d,
+);

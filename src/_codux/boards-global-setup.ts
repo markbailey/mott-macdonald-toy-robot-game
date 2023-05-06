@@ -1,1 +1,1 @@
-import '../index.css';
+import '../assets/stylesheets/global.scss';
