@@ -1,0 +1,34 @@
+@use 'sass:color';
+@use 'sass:map';
+
+@use '../modules/variables' as *;
+@use '../modules/mixins' as *;
+
+// Base Button
+.button {
+  $color: map.get($colors, 'light');
+  $background-color: map.get($colors, 'primary');
+  @include button-style($background-color, $color);
+  // @include button-border-style()
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-5) var(--spacing-7);
+  text-transform: uppercase;
+  // line-height: var(--lh-medium);
+}
+
+// Color Variations
+.danger {
+  $color: map.get($colors, 'light');
+  $background-color: map.get($colors, 'danger');
+  @include button-style($background-color, $color);
+}
+
+// Icon Button
+.iconOnly {
+  padding: var(--spacing-4);
+  min-width: var(--spacing-9);
+  // line-height: var(--lh-large);
+}

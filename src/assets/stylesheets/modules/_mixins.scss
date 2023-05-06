@@ -1,0 +1,50 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+@mixin button-style($background-color, $color) {
+  $lightness-hover: 10%;
+  $lightness-active: -5%;
+  @if (color.blackness($color) > 50%) {
+    $lightness-hover: 15%;
+    $lightness-active: 5%;
+  }
+
+  --transition: 0.25s ease-in-out;
+  --btn-color: #{$background-color};
+
+  border-width: var(--border-1);
+  border-style: solid;
+  border-radius: var(--rounded-0);
+  transition: color var(--transition), background-color var(--transition),
+    border-color var(--transition);
+
+  &:not(:disabled) {
+    color: $color;
+    background-color: var(--btn-color);
+    border-color: var(--btn-color);
+    cursor: pointer;
+  }
+
+  &:not(:disabled):hover {
+    --btn-color: #{color.adjust($background-color, $lightness: $lightness-hover)};
+  }
+
+  &:not(:disabled):active {
+    --btn-color: #{color.adjust($background-color, $lightness: $lightness-active)};
+  }
+
+  &:not(:disabled):focus-visible {
+    outline: var(--border-2) solid #{color.adjust($background-color, $lightness: $lightness-hover)};
+    outline-offset: calc(var(--spacing-2) * -1);
+  }
+}
+
+@mixin button-border-style($color, $size: var(--border-1), $rounded: var(--rounded-0)) {
+  border-width: $size;
+  border-style: solid;
+  border-radius: $rounded;
+
+  &:not(:disabled) {
+    border-color: #{$color};
+  }
+}
