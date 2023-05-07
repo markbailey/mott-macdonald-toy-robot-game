@@ -27,15 +27,21 @@ function GameView(props: GameViewProps) {
 
   const onReportClick = () => executeCommand('REPORT');
   const onQuitClick = () => {
-    insultPlayer('quit');
-    startTransition(() => {
-      // Using confirm here to save time, but this should be replaced with a custom modal
-      if (confirm('Are you sure you want to quit?')) onExit();
-    });
+    // Using confirm here to save time, but this should be replaced with a custom modal
+    if (confirm('Are you sure you want to quit?')) {
+      insultPlayer('quit');
+      startTransition(() => {
+        setTimeout(onExit, 3500);
+      });
+    }
   };
 
-  const onDragActionBarItem = (type: EntityType) => () => setDraggedEntity(type);
-  const onDragOverLeaveBoard = (event: DragEvent<HTMLDivElement>) => {
+  const onDragActionBarItem = (type: EntityType | null) => (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setDraggedEntity(type);
+  };
+
+  const onDragOverLeaveBoard = (event: DragEvent<HTMLElement>) => {
     event.preventDefault();
     const { dataset, parentElement } = event.currentTarget;
     const column = dataset.column;
@@ -46,7 +52,7 @@ function GameView(props: GameViewProps) {
     else setDropZone(null);
   };
 
-  const onDropItem = (event: DragEvent<HTMLDivElement>) => {
+  const onDropItem = (event: DragEvent<HTMLElement>) => {
     event.preventDefault();
     if (draggedEntity !== null && dropZone !== null) {
       switch (draggedEntity) {
@@ -56,10 +62,11 @@ function GameView(props: GameViewProps) {
         case 'wall':
           executeCommand('PLACE_WALL', dropZone.x, dropZone.y);
           break;
+        default:
+          break;
       }
     }
 
-    setDraggedEntity(null);
     setDropZone(null);
   };
 
@@ -87,8 +94,20 @@ function GameView(props: GameViewProps) {
 
         <div style={{ padding: 16 }}>
           <ActionBar>
-            <Robot facing="SOUTH" insult={null} onDrag={onDragActionBarItem('robot')} />
-            <Entity type="wall" onDrag={onDragActionBarItem('wall')} />
+            <Robot
+              facing="SOUTH"
+              insult={null}
+              draggable
+              onDrag={onDragActionBarItem('robot')}
+              onDragEnd={onDragActionBarItem(null)}
+            />
+
+            <Entity
+              type="wall"
+              draggable
+              onDrag={onDragActionBarItem('wall')}
+              onDragEnd={onDragActionBarItem(null)}
+            />
           </ActionBar>
         </div>
       </div>
