@@ -1,0 +1,114 @@
+@keyframes build-up {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+:root {
+  --sprite-size: auto;
+}
+
+.entity {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+
+  @media (min-width: 48rem) {
+    border-radius: 0.75rem;
+  }
+}
+
+.wall {
+  --border-w: 0.125rem;
+  background-color: #57407c;
+  border: var(--border-w) solid #3d2963;
+  animation: build-up 0.25s ease-in-out;
+  background-image: url('/assets/wall.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  box-shadow: 0 0 0.5rem 0rem rgb(0 0 0 / 0.5);
+
+  @media (min-width: 48rem) {
+    --border-w: 0.25rem;
+  }
+}
+
+// Robot Character
+.robot {
+  position: relative;
+  background-image: url('/assets/robot_spritesheet.png');
+  background-repeat: no-repeat;
+  background-size: var(--sprite-size);
+  box-sizing: unset;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0.25rem;
+    left: 25%;
+    width: 50%;
+    height: 10%;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 100%;
+  }
+}
+
+.robot.facingNORTH {
+  background-position: 0 -6.25rem;
+}
+
+.robot.facingSOUTH {
+  background-position: 0 0;
+}
+
+.robot.facingEAST {
+  background-position: -12.5rem 0;
+}
+
+.robot.facingWEST {
+  background-position: calc(-6.25rem + -1px) 0;
+}
+
+.speechBubble {
+  background: #1496bb;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: 50%;
+  margin-bottom: 1rem;
+  // opacity: 0;
+  padding: 1rem;
+  pointer-events: none;
+  position: absolute;
+  width: 200%;
+  min-width: 10rem;
+  transform: translateX(-50%);
+  border-radius: 0.75rem;
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    bottom: -1rem;
+    display: block;
+    height: 1rem;
+    left: 0;
+    width: 100%;
+  }
+
+  &::after {
+    border-left: solid transparent 10px;
+    border-right: solid transparent 10px;
+    border-top: solid #1496bb 10px;
+    bottom: -10px;
+    content: ' ';
+    height: 0;
+    left: 50%;
+    margin-left: -13px;
+    position: absolute;
+    width: 0;
+  }
+}
