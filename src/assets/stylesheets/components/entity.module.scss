@@ -8,6 +8,7 @@
 }
 
 :root {
+  --sprite-w: 6.1rem;
   --sprite-size: auto;
 }
 
@@ -28,7 +29,9 @@
   animation: build-up 0.25s ease-in-out;
   background-image: url('/assets/wall.png');
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   box-shadow: 0 0 0.5rem 0rem rgb(0 0 0 / 0.5);
 
   @media (min-width: 48rem) {
@@ -58,7 +61,7 @@
 }
 
 .robot.facingNORTH {
-  background-position: 0 -6.25rem;
+  background-position: 0 calc(var(--sprite-w) * -1);
 }
 
 .robot.facingSOUTH {
@@ -66,11 +69,12 @@
 }
 
 .robot.facingEAST {
-  background-position: -12.5rem 0;
+  background-position: calc((var(--sprite-w) * 2) * -1) 0;
 }
 
 .robot.facingWEST {
-  background-position: calc(-6.25rem + -1px) 0;
+  --offset: 0.1rem;
+  background-position: calc((var(--sprite-w) + var(--offset)) * -1) 0;
 }
 
 .speechBubble {

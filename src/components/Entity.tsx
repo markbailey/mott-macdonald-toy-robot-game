@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import classNames from 'classnames';
-import show from '../utilities/show';
+import { mount } from '../utilities/show';
 import css from '../assets/stylesheets/components/entity.module.scss';
 
 export type EntityProps = HTMLAttributes<HTMLDivElement> & { type: EntityType };
@@ -18,12 +18,12 @@ function Entity(props: EntityProps) {
 
 export function Robot(props: RobotProps) {
   const { className: classNameProp, facing, insult, onClick, ...otherProps } = props;
-  const className = classNames(css.robot, facing && css[`facing${facing}`], classNameProp);
+  const className = classNames(facing && css[`facing${facing}`], classNameProp);
   const isSpeaking = insult !== null;
 
   return (
     <Entity {...otherProps} type="robot" className={className} onClick={onClick}>
-      {show(isSpeaking, <div className={css.speechBubble}>{insult}</div>)}
+      {mount(isSpeaking, <div className={css.speechBubble}>{insult}</div>)}
     </Entity>
   );
 }
