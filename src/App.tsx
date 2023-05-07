@@ -1,7 +1,7 @@
-import Button from './components/Button';
+import GameView from './views/GameView';
 
 function App() {
-  return <Button>My Button</Button>;
+  return <GameView />;
 }
 
 export default App;
