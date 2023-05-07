@@ -131,7 +131,7 @@ function useGame(level: number) {
     setWalls(newLevel.walls);
   }, [level, setBoard, moveRobot, destroyRobot]);
 
-  return { report, entities, robot, board, executeCommand };
+  return { report, entities, robot, board, executeCommand, insultPlayer };
 }
 
 export default useGame;
