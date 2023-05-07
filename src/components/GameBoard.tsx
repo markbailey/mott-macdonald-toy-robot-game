@@ -12,11 +12,21 @@ export interface GameBoardProps extends HTMLAttributes<HTMLTableElement> {
   isometric?: boolean;
 }
 
-const renderEntityAtPosition = (entities: BoardEntity[], row: number, column: number) => {
-  const entity = entities.find(({ position }) => position.y === row && position.x === column);
+interface BoardCellProps extends HTMLAttributes<HTMLTableCellElement> {
+  column: number;
+  entity?: BoardEntity;
+}
+
+interface BoardRowProps extends HTMLAttributes<HTMLTableRowElement> {
+  row: number;
+  columns: number;
+  entities: BoardEntity[];
+}
+
+const renderEntity = (entity?: BoardEntity) => {
   switch (entity?.type) {
     case 'robot':
-      return <Robot insult={null} {...entity} />;
+      return <Robot facing={entity.facing} insult={entity.insult} onClick={entity.onClick} />;
     case 'wall':
       return <Entity type={entity.type} />;
     default:
@@ -24,26 +34,52 @@ const renderEntityAtPosition = (entities: BoardEntity[], row: number, column: nu
   }
 };
 
+function BoardCell(props: BoardCellProps) {
+  const { column, entity, ...otherProps } = props;
+  return (
+    <td {...otherProps} className={css.cell} data-column={column}>
+      {renderEntity(entity)}
+    </td>
+  );
+}
+
+function BoardRow(props: BoardRowProps) {
+  const [mapToJSX, getEmptyArray] = useMapToJSX();
+  const { row, columns, entities, ...otherProps } = props;
+  const columnsArray = getEmptyArray(columns).map((_, index) => ({
+    column: index + 1,
+    entity: getEntityAtCell(index + 1),
+  }));
+
+  function getEntityAtCell(column: number) {
+    return entities.find((entity) => entity.position.x === column);
+  }
+
+  return (
+    <tr {...otherProps} data-row={row}>
+      {mapToJSX(columnsArray, BoardCell)}
+    </tr>
+  );
+}
+
 function GameBoard(props: GameBoardProps) {
+  const [mapToJSX, getEmptyArray] = useMapToJSX();
   const { className: classNameProp, rows, columns, entities, isometric, ...otherProps } = props;
   const className = classNames(css.board, isometric && css.isometric, classNameProp);
+  const rowsArray = getEmptyArray(rows).map((_, index) => ({
+    row: index + 1,
+    columns,
+    entities: getRowEntities(index + 1),
+  }));
 
-  const [mapToJSX, getEmptyArray] = useMapToJSX();
   useCSSVariables({ '--board-rows': rows, '--board-columns': columns });
+  function getRowEntities(row: number) {
+    return entities.filter((entity) => entity.position.y === row);
+  }
 
   return (
     <table {...otherProps} className={className} aria-label="Game board">
-      <tbody>
-        {mapToJSX(getEmptyArray(rows), ({ index: rowIndex, ...rowProps }) => (
-          <tr {...rowProps} data-row={rowIndex + 1}>
-            {mapToJSX(getEmptyArray(columns), ({ index: columnIndex, ...columnProps }) => (
-              <td {...columnProps} className={css.cell} data-column={columnIndex + 1}>
-                {renderEntityAtPosition(entities, rowIndex + 1, columnIndex + 1)}
-              </td>
-            ))}
-          </tr>
-        )).reverse()}
-      </tbody>
+      <tbody>{mapToJSX(rowsArray, BoardRow).reverse()}</tbody>
     </table>
   );
 }

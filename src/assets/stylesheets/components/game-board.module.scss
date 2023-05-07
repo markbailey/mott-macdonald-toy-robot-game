@@ -1,6 +1,6 @@
 .board {
   --board-gap: var(--spacing-3);
-  --board-p: var(--spacing-4);
+  --board-p: var(--spacing-3);
   --cell-max-size: 6.25rem;
   --cell-size: 3rem;
 
@@ -15,6 +15,7 @@
 
   @media (min-width: 30rem) {
     --board-gap: var(--spacing-4);
+    --board-p: var(--spacing-4);
     --cell-size: 4rem;
   }
 
@@ -25,6 +26,12 @@
 
   @media (min-width: 64rem) {
     --cell-size: var(--cell-max-size);
+  }
+
+  @media (max-height: 29.9375rem) and (orientation: landscape) {
+    --board-gap: var(--spacing-3);
+    --board-p: var(--spacing-4);
+    --cell-size: 3rem;
   }
 }
 
