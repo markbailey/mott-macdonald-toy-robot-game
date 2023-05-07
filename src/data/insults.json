@@ -1,0 +1,82 @@
+{
+  "noEntry": [
+    "Oops, looks like you took a wrong turn!",
+    "Nope, not gonna happen. Try a different route.",
+    "Sorry, but that's a no-go zone.",
+    "You're gonna have to find another way around.",
+    "Nice try, but that path is off-limits.",
+    "Whoops, looks like someone didn't read the map.",
+    "I'm afraid that's a dead end, my friend.",
+    "You're getting warmer, but that's not the right way.",
+    "Careful now, wouldn't want you to get lost.",
+    "Nope, that's a no-fly zone."
+  ],
+  "notInPlay": [
+    "Oops, looks like you're trying to move a ghost!",
+    "Hold your horses, I'm not on the board yet!",
+    "You're eager to play, but I'm not ready to move just yet!",
+    "Can't move me yet, I'm still setting up my pieces.",
+    "You can't move me yet, I haven't even started!",
+    "Sorry, I'm not much of a superhero. I can't fly over to the board!",
+    "I'm not ready for my close-up just yet. Let me get on the board first.",
+    "Whoa there, let's wait until I'm in position before we start moving.",
+    "I'm not a ghost, but I do need to materialize on the board first!",
+    "Hold your horses, I can't move until I'm properly placed!"
+  ],
+  "spinning": [
+    "Hey, dizzy alert! Can we stop spinning now?",
+    "I'm getting dizzy! Let's take a break from spinning.",
+    "Wheee! I'm starting to feel like a carnival ride. Can we stop now?",
+    "Okay, you're making me dizzy. Let's stop spinning for a bit.",
+    "You're making my head spin! Can we take a break from the spinning?",
+    "I'm not a top, you know! Let's take a break from spinning me around.",
+    "Sorry, I'm not much of a spinning top. Can we take a break?",
+    "Whoa there! Can we stop spinning for a bit? My head is starting to spin."
+  ],
+  "handsOff": [
+    "Hey, hands off the merchandise!",
+    "Ouch! What was that for?",
+    "I'm not a button, you know!",
+    "You just love poking me, don't you?",
+    "What's the big idea clicking on me like that?",
+    "Please refrain from poking me, it's not polite!",
+    "That tickles! Stop it!",
+    "Do I look like a game controller to you?",
+    "Excuse me, but I'm not a touchscreen!",
+    "Would you mind not clicking on me like that? It's not very nice."
+  ],
+  "cantGoThere": [
+    "Hey, that's already taken! Find a different spot!",
+    "Sorry, no room at the inn. Try another spot!",
+    "Looks like you need a new plan. That space is already occupied!",
+    "Sorry, that space is already spoken for. Find a different spot!",
+    "No can do! That spot's already taken. Find another spot on the board!",
+    "Looks like you need to get your eyes checked. That space is already occupied!",
+    "Whoa there, that's already occupied. Can't you see?",
+    "Oops, looks like someone forgot to check if that space was available.",
+    "Sorry, but that spot's already taken. You'll have to find a new spot on the board.",
+    "Nope, can't do that. That space is already occupied by another entity. Try a different spot!"
+  ],
+  "report": [
+    "Oh no, not the report command! My secret location is going to be revealed!",
+    "The report command? You're going to give away my secret hiding spot!",
+    "The report command? You're like a detective, always trying to find out where I am!",
+    "I feel so exposed with the report command. Can't a character have any privacy these days?",
+    "Ah, the report command. You just can't resist trying to figure out where I am, can you?",
+    "The report command? I'm starting to feel like I'm under surveillance!",
+    "You're like a stalker with the report command, always trying to figure out where I am!",
+    "Looks like you're trying to play detective with the report command! Can you solve the mystery of my location?"
+  ],
+  "quit": [
+    "What, you're quitting already? Weak!",
+    "Leaving so soon? I thought we were having fun!",
+    "Don't leave me hanging! I was just starting to enjoy myself.",
+    "Well, that was anti-climactic. You could have at least said goodbye!",
+    "You sure you want to quit? I've got some more insults ready if you need motivation to stay!",
+    "I guess I'll just sit here all by myself then. Thanks a lot.",
+    "Quitting already? I guess you're not cut out for this after all.",
+    "Come on, don't be a quitter! You can do better than that.",
+    "Is that all you've got? I was hoping for more of a challenge.",
+    "You're leaving just when things were getting interesting? How rude!"
+  ]
+}
