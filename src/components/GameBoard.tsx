@@ -35,9 +35,16 @@ const renderEntity = (entity?: BoardEntity) => {
 };
 
 function BoardCell(props: BoardCellProps) {
-  const { column, entity, ...otherProps } = props;
+  const { column, entity, onDragOver, onDragLeave, onDrop, ...otherProps } = props;
   return (
-    <td {...otherProps} className={css.cell} data-column={column}>
+    <td
+      {...otherProps}
+      className={css.cell}
+      data-column={column}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+    >
       {renderEntity(entity)}
     </td>
   );
@@ -45,11 +52,16 @@ function BoardCell(props: BoardCellProps) {
 
 function BoardRow(props: BoardRowProps) {
   const [mapToJSX, getEmptyArray] = useMapToJSX();
-  const { row, columns, entities, ...otherProps } = props;
-  const columnsArray = getEmptyArray(columns).map((_, index) => ({
-    column: index + 1,
-    entity: getEntityAtCell(index + 1),
-  }));
+  const { row, columns, entities, onDragOver, onDragLeave, onDrop, ...otherProps } = props;
+  const columnsArray = getEmptyArray(columns).map((_, index) => {
+    return {
+      column: index + 1,
+      entity: getEntityAtCell(index + 1),
+      onDragOver,
+      onDragLeave,
+      onDrop,
+    } as BoardCellProps;
+  });
 
   function getEntityAtCell(column: number) {
     return entities.find((entity) => entity.position.x === column);
@@ -64,13 +76,29 @@ function BoardRow(props: BoardRowProps) {
 
 function GameBoard(props: GameBoardProps) {
   const [mapToJSX, getEmptyArray] = useMapToJSX();
-  const { className: classNameProp, rows, columns, entities, isometric, ...otherProps } = props;
-  const className = classNames(css.board, isometric && css.isometric, classNameProp);
-  const rowsArray = getEmptyArray(rows).map((_, index) => ({
-    row: index + 1,
+  const {
+    className: classNameProp,
+    rows,
     columns,
-    entities: getRowEntities(index + 1),
-  }));
+    entities,
+    isometric,
+    onDragOver,
+    onDragLeave,
+    onDrop,
+    ...otherProps
+  } = props;
+
+  const className = classNames(css.board, isometric && css.isometric, classNameProp);
+  const rowsArray = getEmptyArray(rows).map((_, index) => {
+    return {
+      row: index + 1,
+      columns,
+      entities: getRowEntities(index + 1),
+      onDragOver,
+      onDragLeave,
+      onDrop,
+    } as BoardRowProps;
+  });
 
   useCSSVariables({ '--board-rows': rows, '--board-columns': columns });
   function getRowEntities(row: number) {
