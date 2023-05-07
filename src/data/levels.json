@@ -1,4 +1,11 @@
 {
+  "0": {
+    "walls": [],
+    "board": {
+      "rows": 5,
+      "columns": 5
+    }
+  },
   "1": {
     "startPosition": { "x": 3, "y": 3 },
     "startDirection": "SOUTH",
