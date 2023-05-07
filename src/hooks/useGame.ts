@@ -26,7 +26,7 @@ function useGame(level: number) {
   const [report, setReport] = useState<string>('');
   const [walls, setWalls] = useState<Wall[]>([]);
   const [board, setBoard] = useState<Board>({ rows: 1, columns: 1 });
-  const { robot, moveRobot, spinRobot, insultPlayer, getRobotDirection } = useRobot();
+  const { robot, moveRobot, spinRobot, insultPlayer, getRobotDirection, destroyRobot } = useRobot();
 
   const entities = useMemo(() => (robot !== null ? [...walls, robot] : walls), [robot, walls]);
 
@@ -90,28 +90,26 @@ function useGame(level: number) {
         else if (robot !== null) insultPlayer('cantGoThere');
         break;
       }
-      case Commands.Move: {
-        if (robot === null) return insultPlayer('notInPlay');
-        const newPosition = getRobotPosition(robot.position, robot.facing);
-        if (!doVectorsMatch(newPosition, robot.position))
-          executeCommand('PLACE_ROBOT', newPosition.x, newPosition.y, robot.facing);
-        else insultPlayer('noEntry');
+      case Commands.Move:
+        if (robot !== null) {
+          const newPosition = getRobotPosition(robot.position, robot.facing);
+          if (!doVectorsMatch(newPosition, robot.position))
+            executeCommand('PLACE_ROBOT', newPosition.x, newPosition.y, robot.facing);
+          else insultPlayer('noEntry');
+        }
         break;
-      }
       case Commands.Left:
       case Commands.Right:
         if (robot !== null) {
           const newFacing = getRobotDirection(command)!;
           executeCommand('PLACE_ROBOT', robot.position.x, robot.position.y, newFacing);
           spinRobot();
-        } else {
-          insultPlayer('notInPlay');
         }
         break;
       case Commands.Report:
         if (robot !== null) {
           const { position, facing } = robot;
-          setReport(`${position.x} ${position.y} ${facing}`);
+          setReport(`${position.x},${position.y},${facing}`);
           insultPlayer('report');
         }
         break;
@@ -123,17 +121,15 @@ function useGame(level: number) {
   useControls(executeCommand);
   useEffect(() => {
     const key = `${level}` as LevelKey;
-    const {
-      startDirection,
-      startPosition,
-      walls: initialWalls,
-      board,
-    } = levelData[key] as LevelData;
+    const newLevel = levelData[key] as LevelData | undefined;
+    if (newLevel === undefined) return;
+    if (newLevel?.startPosition !== undefined)
+      moveRobot(newLevel.startPosition, newLevel.startDirection);
+    else if (robot !== null) destroyRobot();
 
-    setBoard(board);
-    setWalls(initialWalls);
-    moveRobot(startPosition, startDirection);
-  }, [level, setBoard, moveRobot]);
+    setBoard(newLevel.board);
+    setWalls(newLevel.walls);
+  }, [level, setBoard, moveRobot, destroyRobot]);
 
   return { report, entities, robot, board, executeCommand };
 }
