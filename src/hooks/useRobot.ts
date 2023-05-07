@@ -5,10 +5,10 @@ type InsultKey = keyof typeof insults;
 
 function useRobot() {
   const [position, setPosition] = useState<Vector2D | null>(null);
-  const [facing, setFacing] = useState<Direction>('NORTH');
+  const [facing, setFacing] = useState<Direction>('SOUTH');
   const [insult, setInsult] = useState<string | null>(null);
 
-  const actionTimeoutsRef = useRef<Map<string, number>>(new Map());
+  const actionTimeoutsRef = useRef<Map<string, NodeJS.Timeout>>(new Map());
   const spinTimesRef = useRef<number>(0);
   const robot: Robot | null = useMemo(
     () =>
@@ -24,7 +24,7 @@ function useRobot() {
 
   function insultPlayer(key: InsultKey) {
     const insultTimeout = actionTimeoutsRef.current.get('insult');
-    if (insultTimeout !== undefined) clearTimeout(insultTimeout);
+    clearTimeout(insultTimeout);
 
     const randomIndex = Math.floor(Math.random() * insults[key].length);
     const newInsult = insults[key][randomIndex];
@@ -40,11 +40,10 @@ function useRobot() {
 
   const spinRobot = () => {
     spinTimesRef.current += 1;
-
     const spinTimeout = actionTimeoutsRef.current.get('spinning');
-    if (spinTimeout !== undefined) clearTimeout(spinTimeout);
-    if (spinTimesRef.current >= 9) insultPlayer('spinning');
+    clearTimeout(spinTimeout);
 
+    if (spinTimesRef.current >= 9) insultPlayer('spinning');
     const timeout = setTimeout(() => {
       spinTimesRef.current = 0;
       actionTimeoutsRef.current.delete('spinning');
@@ -71,7 +70,13 @@ function useRobot() {
     }
   };
 
-  return { robot, moveRobot, spinRobot, insultPlayer, getRobotDirection };
+  const destroyRobot = useCallback(() => {
+    setPosition(null);
+    setFacing('SOUTH');
+    setInsult(null);
+  }, [setFacing, setPosition, setInsult]);
+
+  return { robot, moveRobot, spinRobot, insultPlayer, getRobotDirection, destroyRobot };
 }
 
 export default useRobot;
