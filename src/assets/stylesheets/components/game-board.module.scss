@@ -1,0 +1,56 @@
+.board {
+  --board-gap: var(--spacing-3);
+  --board-p: var(--spacing-4);
+  --cell-max-size: 6.25rem;
+  --cell-size: 3rem;
+
+  border-spacing: var(--board-gap);
+  padding: var(--board-p);
+  margin: var(--spacing-0) auto;
+  background-color: var(--primary);
+  border-radius: var(--spacing-4);
+
+  box-shadow: 0 0 var(--spacing-4) var(--spacing-3) rgb(0 0 0 / 0.25);
+  transition: width 0.25s ease-in-out, height 0.25s ease-in-out transform 0.25s ease-in-out;
+
+  @media (min-width: 30rem) {
+    --board-gap: var(--spacing-4);
+    --cell-size: 4rem;
+  }
+
+  @media (min-width: 48rem) {
+    --board-gap: var(--spacing-5);
+    --cell-size: 5rem;
+  }
+
+  @media (min-width: 64rem) {
+    --cell-size: var(--cell-max-size);
+  }
+}
+
+.board.isometric {
+  // perspective-origin: top;
+  transform: perspective(1000px) rotate3d(1000, 1, -5, 45deg);
+  // rotateZ(0)
+}
+
+.cell {
+  --sprite-size: calc(100% * 3);
+  --shadow-offsets: -0.125rem 0.125rem 0.125rem 0.125rem;
+  --border-radius: var(--spacing-4);
+
+  width: var(--cell-size);
+  height: var(--cell-size);
+  max-width: var(--cell-max-size);
+  max-height: var(--cell-max-size);
+  aspect-ratio: 1 / 1;
+
+  background-color: var(--primary-dark);
+  border-radius: var(--border-radius);
+  box-shadow: inset var(--shadow-offsets) rgb(0 0 0 / 0.25);
+
+  @media (min-width: 48rem) {
+    --border-radius: var(--spacing-5);
+    --shadow-offsets: -0.25rem 0.25rem 0.25rem 0.25rem;
+  }
+}
