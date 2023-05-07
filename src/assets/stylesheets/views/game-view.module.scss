@@ -1,0 +1,11 @@
+.view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--screen-h);
+  width: var(--full);
+
+  @media (orientation: portrait) {
+    flex-direction: column;
+  }
+}
