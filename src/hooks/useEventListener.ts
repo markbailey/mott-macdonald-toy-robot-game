@@ -7,10 +7,10 @@ type Element = HTMLElement | Window | MediaQueryList | null;
 // @param {string} eventType - The event type to listen for.
 // @param {function} callback - The callback to run when the event is triggered.
 // @param {Element} element - The element to listen for the event on.
-function useEventListener(
+function useEventListener<T extends Element | typeof globalThis>(
   eventType: string,
   callback: EventListenerOrEventListenerObject,
-  element: Element = window
+  element: T = globalThis as T
 ) {
   useEffect(() => {
     if (element === null) return;
