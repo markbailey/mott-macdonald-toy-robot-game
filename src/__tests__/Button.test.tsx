@@ -10,6 +10,7 @@ describe('Button component', () => {
     const textContent = 'My Button';
     render(<Button>{textContent}</Button>);
     button = screen.getByText(textContent);
+    button.addEventListener('click', buttonClicked);
   });
 
   it('Verify that the component renders', async () => {
@@ -17,7 +18,6 @@ describe('Button component', () => {
   });
 
   it('Verify the onClick event triggers', async () => {
-    button.addEventListener('click', buttonClicked);
     button.click();
     expect(buttonClicked).toBeCalledTimes(1);
   });

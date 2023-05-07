@@ -44,16 +44,21 @@ declare interface Board {
   columns: number;
 }
 
-declare interface LevelData {
-  startPosition: Vector2D;
-  startDirection: Direction;
+declare type LevelData = {
   walls: Wall[];
   board: Board;
-}
+} & (
+  | {
+      startPosition: Vector2D;
+      startDirection: Direction;
+    }
+  | {
+      startPosition?: never;
+      startDirection?: never;
+    }
+);
 
 // State
-declare interface GameState {
-  level: number | null;
-  walls: Wall[];
-  robot: Robot | null;
+declare interface Keybindings {
+  [key: CommandNoArgs]: string;
 }
