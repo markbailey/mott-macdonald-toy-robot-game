@@ -12,8 +12,9 @@
   // Colors
   --primary: #{map.get($colors, 'primary')};
   --primary-dark: #{map.get($colors, 'primary-dark')};
+  --primary-darkest: #{map.get($colors, 'primary-darkest')};
   --secondary: #{map.get($colors, 'secondary')};
-  --danger: #{map.get($colors, 'danger')};
+  --light: #{map.get($colors, 'light')};
 
   // Spacings
   --spacing-0: #{map.get($spacings, '0')};
@@ -34,9 +35,7 @@
 
   // Rounded
   --rounded-0: #{map.get($border-radius, '0')};
-
-  // Misc
-  --root-p: 1rem;
+  --rounded-2: #{map.get($border-radius, '2')};
 }
 
 *,
@@ -56,10 +55,10 @@ body {
   font-family: var(--font-family);
   font-size: 16px;
 
-  // color: #f5f5f5;
-  // background: linear-gradient(70deg, #020024, #57407c 47%, #00d4ff);
-  // background-repeat: no-repeat;
-  // background-position: 0 100%;
+  color: var(--light);
+  background: linear-gradient(70deg, var(--primary-darkest), var(--primary) 47%, var(--secondary));
+  background-repeat: no-repeat;
+  background-position: 0 var(--full);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -71,5 +70,4 @@ body {
 #root {
   display: grid;
   place-items: center;
-  // padding: var(--root-p);
 }

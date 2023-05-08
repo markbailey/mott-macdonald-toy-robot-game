@@ -15,10 +15,10 @@
 .entity {
   width: 100%;
   height: 100%;
-  border-radius: 0.5rem;
+  border-radius: var(--spacing-4);
 
   @media (min-width: 48rem) {
-    border-radius: 0.75rem;
+    border-radius: var(--spacing-5);
   }
 }
 
@@ -32,7 +32,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 0 0 0.5rem 0rem rgb(0 0 0 / 0.5);
+  box-shadow: 0 0 var(--spacing-4) 0rem rgb(0 0 0 / 0.5);
 
   @media (min-width: 48rem) {
     --border-w: 0.25rem;
@@ -78,40 +78,39 @@
 }
 
 .speechBubble {
-  background: #1496bb;
-  bottom: 100%;
-  color: #fff;
-  display: block;
-  left: 50%;
-  margin-bottom: 1rem;
-  // opacity: 0;
-  padding: 1rem;
-  pointer-events: none;
   position: absolute;
+  bottom: var(--full);
+  left: 50%;
   width: 200%;
+  display: block;
   min-width: 10rem;
+  background: var(--secondary);
+  color: var(--light);
+  margin-bottom: var(--spacing-6);
+  padding: var(--spacing-6);
+  pointer-events: none;
   transform: translateX(-50%);
-  border-radius: 0.75rem;
+  border-radius: var(--spacing-5);
 
   &::before {
     content: ' ';
     position: absolute;
-    bottom: -1rem;
+    bottom: calc(var(--spacing-6) * -1);
     display: block;
-    height: 1rem;
+    height: var(--spacing-6);
     left: 0;
-    width: 100%;
+    width: var(--full);
   }
 
   &::after {
-    border-left: solid transparent 10px;
-    border-right: solid transparent 10px;
-    border-top: solid #1496bb 10px;
-    bottom: -10px;
+    border-left: solid transparent var(--spacing-5);
+    border-right: solid transparent var(--spacing-5);
+    border-top: solid var(--secondary) var(--spacing-5);
+    bottom: calc(var(--spacing-5) * -1);
     content: ' ';
     height: 0;
     left: 50%;
-    margin-left: -13px;
+    margin-left: calc(var(--spacing-5) * -1);
     position: absolute;
     width: 0;
   }
