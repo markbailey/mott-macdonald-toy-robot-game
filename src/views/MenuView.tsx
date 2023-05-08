@@ -15,7 +15,7 @@ function MenuView(props: MenuViewProps) {
     <div {...otherProps}>
       <div className={css.buttonList}>
         <Button onClick={onStartGameClick(1)}>Start New Game</Button>
-        <Button onClick={onStartGameClick(0)}>Tutorial</Button>
+        <Button onClick={onStartGameClick(0)}>Free Play</Button>
       </div>
     </div>
   );
