@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState, useTransition } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import insults from '../data/insults.json';
 
 type InsultKey = keyof typeof insults;
