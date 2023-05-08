@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { HTMLAttributes } from 'react';
 
 import Button from '../components/Button';
@@ -9,12 +8,11 @@ export type MenuViewProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 function MenuView(props: MenuViewProps) {
-  const { className: classNameProp, onStartGame, ...otherProps } = props;
-  const className = classNames(css.view, classNameProp);
+  const { onStartGame, ...otherProps } = props;
   const onStartGameClick = (level: number) => () => onStartGame(level);
 
   return (
-    <div {...otherProps} className={className}>
+    <div {...otherProps}>
       <div className={css.buttonList}>
         <Button onClick={onStartGameClick(1)}>Start New Game</Button>
         <Button onClick={onStartGameClick(0)}>Tutorial</Button>

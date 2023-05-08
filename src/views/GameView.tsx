@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { HTMLAttributes, useState, useTransition, DragEvent } from 'react';
 
 import GameBoard from '../components/GameBoard';
@@ -14,7 +13,7 @@ export type GameViewProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 function GameView(props: GameViewProps) {
-  const { className: classNameProp, startLevel, onExit, ...otherProps } = props;
+  const { startLevel, onExit, ...otherProps } = props;
   const [level, setLevel] = useState(startLevel);
   const [isometric, setIsometric] = useState(false);
   const [draggedEntity, setDraggedEntity] = useState<EntityType | null>(null);
@@ -22,8 +21,6 @@ function GameView(props: GameViewProps) {
 
   const { board, entities, report, insultPlayer, executeCommand } = useGame(level);
   const [, startTransition] = useTransition();
-
-  const className = classNames(css.view, classNameProp);
 
   const onReportClick = () => executeCommand('REPORT');
   const onQuitClick = () => {
@@ -71,7 +68,7 @@ function GameView(props: GameViewProps) {
   };
 
   return (
-    <div {...otherProps} className={className}>
+    <div {...otherProps}>
       <div className={css.gameContainer}>
         <header className={css.controlBar}>
           <Button onClick={onReportClick}>Report</Button>
