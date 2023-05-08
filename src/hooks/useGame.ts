@@ -79,6 +79,7 @@ function useGame(level: number) {
         const position = { x, y };
         const hasEntity = getHasEntityAtPosition(position, false);
         if (!hasEntity) moveRobot(position, facing);
+        else if (robot !== null) insultPlayer('cantGoThere');
         break;
       }
       case Commands.PlaceWall: {
