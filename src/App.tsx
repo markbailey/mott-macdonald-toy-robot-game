@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import GameView from './views/GameView';
 import { mount } from './utilities/show';
 import MenuView from './views/MenuView';
+import css from './assets/stylesheets/app.module.scss';
 
 function App() {
   const [view, setView] = useState('menu');
@@ -19,8 +20,11 @@ function App() {
 
   return (
     <Fragment>
-      {mount(view === 'menu', <MenuView onStartGame={onStartGame} />)}
-      {mount(view === 'game', <GameView startLevel={level} onExit={onExitGame} />)}
+      {mount(view === 'menu', <MenuView onStartGame={onStartGame} className={css.view} />)}
+      {mount(
+        view === 'game',
+        <GameView startLevel={level} onExit={onExitGame} className={css.view} />
+      )}
     </Fragment>
   );
 }
