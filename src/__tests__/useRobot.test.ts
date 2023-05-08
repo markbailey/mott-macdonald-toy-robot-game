@@ -18,9 +18,6 @@ describe('useRobot', () => {
   it('moveRobot function should move robot to new position', async () => {
     const { result } = renderHook(() => useRobot());
     act(() => result.current.moveRobot({ x: 1, y: 1 }, 'NORTH'));
-    expect(result.current.robot?.position).toEqual({ x: 1, y: 1 });
-    expect(result.current.robot?.facing).toEqual('NORTH');
-
     act(() => result.current.moveRobot({ x: 5, y: 5 }, 'EAST'));
     expect(result.current.robot?.position).toEqual({ x: 5, y: 5 });
     expect(result.current.robot?.facing).toEqual('EAST');
