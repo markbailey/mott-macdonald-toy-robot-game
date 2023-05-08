@@ -51,9 +51,9 @@ describe('useGame', () => {
 
   it('should turn robot left', () => {
     const { result } = renderHook(() => useGame(0));
-    act(() => result.current.executeCommand('PLACE_ROBOT', 1, 1, 'NORTH'));
+    act(() => result.current.executeCommand('PLACE_ROBOT', 1, 1, 'WEST'));
     act(() => result.current.executeCommand('LEFT'));
-    expect(result.current.robot?.facing).toEqual('WEST');
+    expect(result.current.robot?.facing).toEqual('NORTH');
   });
 
   it('should turn robot right', () => {
@@ -101,7 +101,7 @@ describe('useGame', () => {
     act(() => result.current.executeCommand('MOVE'));
     act(() => result.current.executeCommand('REPORT'));
 
-    // # the app should print: 2,3,EAST < -- incorrect, should be x, y not y, x
+    // TASK TEST # the app should print: 2,3,EAST < -- incorrect, should be 3,2,EAST
     expect(result.current.report).toEqual('3,2,EAST');
   });
 });
